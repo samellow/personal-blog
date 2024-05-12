@@ -1,0 +1,27 @@
+.create-Article h2{
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.article-input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+.article-input .article-title {
+    display: block;
+    background-color: #ffff;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.article-excerpt, .article-content{
+    display: block;
+    background-color: #ffff;
+    width: 90%;
+    margin-bottom: 20px;
+    padding: 10px;
+}
