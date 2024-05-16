@@ -3,12 +3,13 @@ import './article.css'
 import { MdOutlineDeleteOutline } from "react-icons/md"
 import { MdOutlineEdit } from "react-icons/md"
 
-const Article = () => {
+const Article = ({title, excerpt}) => {
+  
   return (
     <article className="article">
       <div className="article-description">
-      <h2 className="title">Article Title</h2>
-      <p className="excerpt">The articles excerpt ......</p>
+      <h2 className="title">{title}</h2>
+      <p className="excerpt">{excerpt}</p>
       </div>
 
       <div className="article-icons">
