@@ -4,6 +4,7 @@ import Dashboard from './components/dashboard/Dashboard'
 import Articles from './components/article/Articles'
 import CreateArticle from './components/createArticle/CreateArticle'
 import { Toaster } from 'react-hot-toast'
+import EditArticle from './components/article/EditArticle'
 
 const App = () => {
   return (
@@ -13,7 +14,7 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Articles></Articles>}></Route>
         <Route path='/create' element={ <CreateArticle></CreateArticle>}> </Route>
-
+        <Route path='/edit' element={<EditArticle/>}></Route>
       </Routes>
      
     

@@ -1,9 +1,18 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './article.css'
 import { MdOutlineDeleteOutline } from "react-icons/md"
 import { MdOutlineEdit } from "react-icons/md"
+import { useDispatch } from 'react-redux'
+import { deleteArticle } from './articlesSlice'
+import { Link } from 'react-router-dom'
 
-const Article = ({title, excerpt}) => {
+const Article = ({title, excerpt, _id}) => {
+const dispatch = useDispatch()
+
+const handleDelete = ()=> {
+  dispatch(deleteArticle(_id))
+}
+  
   
   return (
     <article className="article">
@@ -13,8 +22,9 @@ const Article = ({title, excerpt}) => {
       </div>
 
       <div className="article-icons">
-        <i><MdOutlineEdit /></i>
-        <i><MdOutlineDeleteOutline /></i>
+        <Link to='/edit'><i><MdOutlineEdit  /></i></Link>
+        
+        <i><MdOutlineDeleteOutline  onClick={handleDelete}/></i>
       </div>
       
 

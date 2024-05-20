@@ -32,13 +32,13 @@ const getArticleById = async (req, res) => {
 
 const createArticle = async (req, res) => {
     try {
-        const { title, content, excerpt} = req.body
+        const { title, excerpt, content} = req.body
 
-        const article = new Article({title, content, excerpt});
+        const article = new Article({title, excerpt, content});
         const newArticle = await article.save();
         res.status(201).json(newArticle);
     } catch (error) {
-        res.json({message: 'Error saving article'})
+        res.json({message: error.message});
         console.log(error.message)
     }
 }
@@ -62,17 +62,18 @@ const updateArticle = async (req, res) => {
 
 const deleteArticle = async (req, res) => {
     try {
-        const articleId = req.params.id
-        await Article.findByIdAndDelete(articleId)
+        const articleId = req.params.id;
+        const deletedArticle = await Article.findByIdAndDelete(articleId);
 
-        if(!articleId){
-            return res.status(404).json({message: 'Article not found'})
+        if (!deletedArticle) {
+            return res.status(404).json({ message: 'Article not found' });
         }
-        res.status(200).json('article deleted')
-} catch{
-    res.status(404).json({message: 'error deleting article'})
-    console.log(error.message)
-}
-}
+
+        res.status(200).json({ message: 'Article deleted' });
+    } catch (error) {
+        res.status(500).json({ message: 'Error deleting article', error: error.message });
+        console.log(error.message);
+    }
+};
 
 module.exports = {getArticles, createArticle, getArticleById, updateArticle, deleteArticle};
