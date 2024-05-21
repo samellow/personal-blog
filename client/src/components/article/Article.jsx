@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux'
 import { deleteArticle } from './articlesSlice'
 import { Link } from 'react-router-dom'
 
+
 const Article = ({title, excerpt, _id}) => {
 const dispatch = useDispatch()
 
@@ -15,20 +16,25 @@ const handleDelete = ()=> {
   
   
   return (
+    <>
+    
     <article className="article">
       <div className="article-description">
-      <h2 className="title">{title}</h2>
+    <Link to= {`/thisArticle/${_id}`}>  <h2 className="title">{title}</h2></Link>
       <p className="excerpt">{excerpt}</p>
       </div>
 
       <div className="article-icons">
-        <Link to='/edit'><i><MdOutlineEdit  /></i></Link>
+        <Link to={`/edit/${_id}`}><i><MdOutlineEdit /></i></Link>
         
         <i><MdOutlineDeleteOutline  onClick={handleDelete}/></i>
       </div>
       
 
     </article>
+   
+    </>
+  
   )
 }
 

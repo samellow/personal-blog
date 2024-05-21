@@ -143,4 +143,7 @@ export const selectAllArticles = (state) => state.articles.articles;
 export const getArticlesStatus = (state) => state.articles.status;
 export const getArticlesError = (state) => state.articles.error;
 
+export const selectArticleById = (state, articleId) => 
+    state.articles.articles.find(article => article._id === articleId);
+
 export default articlesSlice.reducer
