@@ -32,26 +32,30 @@ const EditArticle = () => {
         setContent(e.target.value)
     }
     
-    const onSaveArticleClicked = () => {
+    const onSaveArticleClicked =  (e) => {
+        e.preventDefault()
         if(!excerpt, !title, !content) {
             toast.error('Fill all fields')
             return
         }
 
         try {
-            dispatchEvent(updateArticle(articleId))
+           dispatch(updateArticle({id: articleId, title, excerpt, content})).unwrap()
 
-            setTitle('')
-            setExcerpt('')
-            setContent('')
-            toast.success('Article updated successfully')
+            
             navigate(`/thisArticle/${articleId}`)
         } catch (error) {
             console.log(error)
         }
+        finally{
+            setTitle('')
+            setExcerpt('')
+            setContent('')
+        }
     }
   
-    const onDeleteArticleClicked = () => {
+    const onDeleteArticleClicked = (e) => {
+        e.preventDefault()
         try {
             dispatch(deleteArticle(articleId))
             toast.success('Article deleted successfully')

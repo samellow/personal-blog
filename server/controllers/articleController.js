@@ -1,3 +1,4 @@
+const { trusted } = require('mongoose');
 const Article = require('../models/article');
 
 const getArticles = async(req, res)=> {
@@ -47,7 +48,7 @@ const updateArticle = async (req, res) => {
     try {
         const articleId = req.params.id
         const update = req.body
-        const article = await Article.findByIdAndUpdate(articleId, update )
+        const article = await Article.findByIdAndUpdate(articleId, update, {new: true} )
 
         if(!article) {
             return res.status(404).json({message: 'Article not found'})

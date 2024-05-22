@@ -70,10 +70,26 @@ async (articleId)=>{
 })
 
 export const updateArticle = createAsyncThunk('articles/update',
-async (articleId) => {
+async (article) => {
     try {
-        const response = await fetch(`api/article/${articleId}`)
-        return response.data
+        const response = await fetch(`api/article/update/${article.id}`,{
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(article)
+        })
+        if(response.status === 200) {
+            toast.success('Article updated successfully')
+        }
+        const data = await response.json()
+        console.log(article.id)
+        if (data.error){
+            toast.error(data.message)
+            console.log(data.message)
+            
+        }
+        return data
     } catch (error) {
         console.log(error)
     }
@@ -144,6 +160,6 @@ export const getArticlesStatus = (state) => state.articles.status;
 export const getArticlesError = (state) => state.articles.error;
 
 export const selectArticleById = (state, articleId) => 
-    state.articles.articles.find(article => article._id === articleId);
+    state.articles.articles.find(article => article?._id === articleId);
 
 export default articlesSlice.reducer
